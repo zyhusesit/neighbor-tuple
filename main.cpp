@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 struct NumNode {
     bool is_last_neighbor = false;
     bool is_next_neighbor = false;
@@ -16,7 +15,6 @@ int main() {
 
     int SourceData[N];
     NumNode TargetData[N + 1];
-
 
     for (int i = 0; i < N; ++i) {
         SourceData[i] = experimental::randint(0, N);
@@ -40,5 +38,5 @@ int main() {
         else if (TargetData[i].is_last_neighbor)
             cout << "(" << i << "," << i - 1 << ") " << endl;
     }
-    cout << "The sum is: " << sum;
+    cout << "The sum of tuple is: " << sum;
 }
