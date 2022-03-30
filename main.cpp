@@ -4,8 +4,8 @@
 using namespace std;
 
 struct NumNode {
-    bool is_last_neighbor = false;
     bool is_next_neighbor = false;
+    bool is_next_neighbor_reverse = false;
 };
 
 int main() {
@@ -24,18 +24,26 @@ int main() {
 
     for (int i = 0; i < N - 1; ++i) {
         if (SourceData[i] - SourceData[i + 1] == -1) {
-            TargetData[SourceData[i]].is_next_neighbor = true;
-            sum++;
+            if (TargetData[SourceData[i] + 1].is_next_neighbor_reverse)
+                continue;
+            else {
+                TargetData[SourceData[i]].is_next_neighbor = true;
+                sum++;
+            }
         } else if (SourceData[i] - SourceData[i + 1] == 1) {
-            TargetData[SourceData[i]].is_last_neighbor = true;
-            sum++;
+            if (TargetData[SourceData[i] - 1].is_next_neighbor)
+                continue;
+            else {
+                TargetData[SourceData[i]].is_next_neighbor_reverse = true;
+                sum++;
+            }
         }
     }
 
     for (int i = 0; i < N + 1; ++i) {
         if (TargetData[i].is_next_neighbor)
             cout << "(" << i << "," << i + 1 << ") " << endl;
-        else if (TargetData[i].is_last_neighbor)
+        else if (TargetData[i].is_next_neighbor_reverse)
             cout << "(" << i << "," << i - 1 << ") " << endl;
     }
     cout << "The sum of tuple is: " << sum;
